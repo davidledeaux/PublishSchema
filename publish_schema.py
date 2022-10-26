@@ -6,6 +6,7 @@ from operator import itemgetter
 #########################
 user=''
 password=''
+workspace_oid = 
 include_custom_fields = True
 ##########################
 
@@ -15,7 +16,7 @@ css = 'table,tr,th,td { border: 1px solid; border-collapse: collapse; }\n' \
 print("[{timestamp}] Starting run".format(timestamp=datetime.datetime.now()))
 
 session = requests.session()
-results = session.get('https://rally1.rallydev.com/slm/schema/v2.0/workspace/198278166140', auth=(user,password)).json()
+results = session.get('https://rally1.rallydev.com/slm/schema/v2.0/workspace/{workspace_oid}'.format(workspace_oid=workspace_oid), auth=(user,password)).json()
 schema = sorted(results['QueryResult']['Results'], key=itemgetter('Name'))
 nav = ''
 tables = ''
