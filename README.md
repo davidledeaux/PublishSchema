@@ -12,3 +12,7 @@ Run the script:
 python publish_schema.py
 
 Output will be field_def.html
+
+
+
+This script is provided without warranty or support.
