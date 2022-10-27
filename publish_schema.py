@@ -12,7 +12,8 @@ include_custom_fields = True
 
 css = """
 table,tr,th,td { border: 1px solid; border-collapse: collapse; }
-td,th { padding 5px; }
+td,th { padding: 5px; }
+tr:nth-child(even) { background-color: #dddddd; }
 .sidenav {
   height: 100%; /* Full-height: remove this if you want "auto" height */
   width: 160px; /* Set the width of the sidebar */
@@ -24,7 +25,8 @@ td,th { padding 5px; }
   padding-top: 20px;
 }
 .sidenav a {
-  padding: 3px;
+  text-decoration: none;
+  display: block;
 }
 .sidenav a:hover {
   color: #212121;
