@@ -56,5 +56,5 @@ with open('field_defs.html', 'w') as f:
 
 print(tables)
 
-print("[{timestamp}] Wrote file".format(timestamp=datetime.datetime.now()))
+print("[{timestamp}] Wrote file field_defs.html".format(timestamp=datetime.datetime.now()))
 print("[{timestamp}] Finished run".format(timestamp=datetime.datetime.now()))
