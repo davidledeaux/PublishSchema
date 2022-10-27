@@ -37,7 +37,7 @@ for object_type in schema:
         schema_type = attrib['SchemaType']
         if attrib['AttributeType'] == 'OBJECT':
             schema_type = '<a href="#{object_name}">{schema_type}</a>'.format(object_name=attrib['SchemaType'],schema_type=attrib['SchemaType'])
-        elif attrib['AttributeType'] == 'COLLECTION' and attrib['RealType'] == 'COLLECTION':
+        elif (attrib['RealType'] == 'MULTI_VALUE' and attrib['Custom'] == False) or (attrib['AttributeType'] == 'COLLECTION' and attrib['RealType'] == 'COLLECTION'):
             schema_type = '<a href="#{object_name}">{schema_type}</a>'.format(object_name=attrib['AllowedValueType']['_refObjectName'],schema_type=attrib['SchemaType'])
 
         attribute_type = attrib['AttributeType']
