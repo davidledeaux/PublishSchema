@@ -39,6 +39,11 @@ for object_type in schema:
         else:
             schema_type = attrib['SchemaType']
 
+        if attrib['AttributeType'] == 'COLLECTION':
+            schema_type = '<a href="#{object_name}">{schema_type}</a>'.format(object_name=attrib['AllowedValueType']['_refObjectName'],schema_type=attrib['SchemaType'])
+        else:
+            schema_type = attrib['SchemaType']
+            
         table_row = '<tr><td>{element_name}</td><td>{attribute_type}</td><td>{schema_type}</td><td>{max_length}</td><td>{max_fractional_digits}</td><td>{filterable}</td><td>{read_only}</td><td>{required}</td><td>{sortable}</td><td><a href="{ref}" target="_blank">Field Details</a></td></tr>\n' \
             .format(element_name=attrib['ElementName'],attribute_type=attrib['AttributeType'],schema_type=schema_type,max_length=attrib['MaxLength'],max_fractional_digits=attrib['MaxFractionalDigits'],filterable=attrib['Filterable'],read_only=attrib['ReadOnly'],required=attrib['Required'],sortable=attrib['Sortable'],ref=attrib['_ref'])
         table_rows = table_rows + table_row
