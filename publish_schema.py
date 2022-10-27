@@ -10,12 +10,39 @@ workspace_oid =
 include_custom_fields = True
 ##########################
 
-css = 'table,tr,th,td { border: 1px solid; border-collapse: collapse; }\n' \
-      'td,th { padding 3px; }'
+css = """
+table,tr,th,td { border: 1px solid; border-collapse: collapse; }
+td,th { padding 5px; }
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+.sidenav a {
+  padding: 3px;
+}
+.sidenav a:hover {
+  color: #212121;
+}
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+"""
 
 print("[{timestamp}] Starting run".format(timestamp=datetime.datetime.now()))
 
 session = requests.session()
+
 results = session.get('https://rally1.rallydev.com/slm/schema/v2.0/workspace/{workspace_oid}'.format(workspace_oid=workspace_oid), auth=(user,password)).json()
 schema = sorted(results['QueryResult']['Results'], key=itemgetter('Name'))
 nav = ''
@@ -25,6 +52,7 @@ table_row = ''
 for object_type in schema:
     nav = nav + '<a href="#{object_name}">{object_name}</a><br>'.format(object_name=object_type['ElementName'])
     table_rows = ''
+
     if object_type['Abstract']:
         continue
 
@@ -50,7 +78,7 @@ for object_type in schema:
 
     tables = tables + '<h2 id="{element_name}">{object_name}</h2>\n<table>\n<tr><th>Element Name</th><th>Attribute Type</th><th>Schema Type</th><th>Max Length</th><th>Max Fractional Digits</th><th>Filterable</th><th>Read Only</th><th>Required</th><th>Sortable</th><th>Details</th></tr>\n{table_rows}</table>\n\n'.format(element_name=object_type['ElementName'],object_name=object_type['Name'],table_rows=table_rows)
 
-html = '<html><head><style>\n{css}\n</style></head><body>\n{tables}\n</body></html>'.format(css=css,tables=tables)
+html = '<html><head><style>\n{css}\n</style></head><body><div class="sidenav">{nav}</div><div class=main>\n{tables}\n</div></body></html>'.format(css=css,nav=nav,tables=tables)
 with open('field_defs.html', 'w') as f:
     f.write(html)
 
