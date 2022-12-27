@@ -22,5 +22,9 @@ Run the script:
 Output will be field_def.html
 
 
+# Sample Output
+![Screenshot](https://github.com/davidledeaux/PublishSchema/blob/main/ScreenShot.png?raw=true)
+
+
 # Misc
 This script is provided without warranty or support.
